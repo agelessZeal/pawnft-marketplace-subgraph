@@ -1,0 +1,16 @@
+{
+  "name": "paw-subgraph",
+  "license": "UNLICENSED",
+  "scripts": {
+    "codegen": "graph codegen",
+    "build": "graph build",
+    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ agelesszeal/paw-nft",
+    "create-local": "graph create --node http://localhost:8020/ agelesszeal/paw-nft",
+    "remove-local": "graph remove --node http://localhost:8020/ agelesszeal/paw-nft",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 agelesszeal/paw-nft"
+  },
+  "dependencies": {
+    "@graphprotocol/graph-cli": "0.20.1",
+    "@graphprotocol/graph-ts": "0.20.0"
+  }
+}

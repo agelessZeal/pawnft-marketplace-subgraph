@@ -168,6 +168,12 @@ export function handleListCancelled(event: ListCancelled): void {
 export function handleItemSold(event: ItemSold): void {
   let entity = Item.load(event.params.itemId.toString())
 
+  log.debug('ItemSold detected. buyer: {} | tokenId: {} | itemId: {}', [
+    event.params.buyer.toHexString(),
+    event.params.tokenID.toHexString(),
+    event.params.itemId.toString(),
+  ]);
+
   if (entity != null) {
     entity.count = entity.count.minus(BigInt.fromI32(1))
     if(entity.count.isZero()) {
@@ -175,6 +181,13 @@ export function handleItemSold(event: ItemSold): void {
     }
 
     entity.save()
+  }
+
+  let token = Token.load(event.params.tokenID.toHexString());
+
+  if(token){
+    token.itemId  = event.params.itemId.toString()
+    token.save()
   }
 }
 
@@ -207,6 +220,7 @@ export function handleTransfer(event: TransferEvent): void {
     token = new Token(event.params.tokenId.toHexString());
     token.owner = event.params.to.toHexString();
     token.contract = event.address.toHexString();
+    token.itemId = '';
 
     let uri = instance.try_tokenURI(event.params.tokenId);
     if (!uri.reverted) {

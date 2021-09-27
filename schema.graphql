@@ -38,6 +38,7 @@ type Item @entity {
 
 type Token @entity {
   id: ID!
+  itemId: ID!
   owner: Owner
   uri: String
   transfers: [Transfer!]! @derivedFrom(field: "token")

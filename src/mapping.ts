@@ -1,6 +1,6 @@
 import { log, BigInt, JSONValue, Value, ipfs  } from "@graphprotocol/graph-ts"
 import {
-  pawNFT,
+  vxlNFT,
   Approval,
   BidAddedToItem,
   ItemCreated,
@@ -10,7 +10,7 @@ import {
   ItemSold,
   UpdatedSupportCurrency,
   Transfer as TransferEvent
-} from "../generated/pawNFT/pawNFT"
+} from "../generated/vxlNFT/vxlNFT"
 
 import { PaymentCurrency, Bid, Item, Token, Owner, Transfer, Contract } from "../generated/schema"
 
@@ -33,7 +33,7 @@ export function handleItemCreated(event: ItemCreated): void {
     entity = new Item(itemId.toString())
   }
 
-  let instance = pawNFT.bind(event.address);
+  let instance = vxlNFT.bind(event.address);
   entity.creator = event.transaction.from;
 
   let item = instance.try_items(itemId);
@@ -75,7 +75,7 @@ export function handleItemImported(event: ItemImported): void {
     entity = new Item(itemId.toString())
   }
 
-  let instance = pawNFT.bind(event.address);
+  let instance = vxlNFT.bind(event.address);
   let item = instance.try_items(itemId);
   if (!item.reverted) {
     let itemData = item.value.toMap();
@@ -206,7 +206,7 @@ export function handleTransfer(event: TransferEvent): void {
     .concat(':'.concat(event.transactionLogIndex.toHexString()));
   let transfer = Transfer.load(transferId);
   let contract = Contract.load(event.address.toHexString());
-  let instance = pawNFT.bind(event.address);
+  let instance = vxlNFT.bind(event.address);
 
   if (previousOwner == null) {
     previousOwner = new Owner(event.params.from.toHexString());

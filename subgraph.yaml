@@ -3,12 +3,12 @@ schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum/contract
-    name: pawNFT
+    name: vxlNFT
     network: rinkeby
     source:
-      address: "0xfBCE094E707586fbF13B19F5CbaB196196bd71da"
-      abi: pawNFT
-      startBlock: 9251310
+      address: "0x18D1F6b70b789e58349117bF7a37d5ba999bC056"
+      abi: vxlNFT
+      startBlock: 9799411
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -23,8 +23,8 @@ dataSources:
         - UpdatedSupportCurrency
         - Transfer
       abis:
-        - name: pawNFT
-          file: ./abis/pawNFT.json
+        - name: vxlNFT
+          file: ./abis/vxlNFT.json
       eventHandlers:
         - event: BidAddedToItem(address,uint256,uint256)
           handler: handleBidAddedToItem
